@@ -20,14 +20,6 @@ RUN cd /tmp && wget https://github.com/munin-monitoring/munin/archive/${MUNIN_VE
     make install && \
     cd && rm /tmp/munin-2.999.14 -r
 
-FROM ubuntu:19.10
-# RUN apt-get update && \
-#     apt-get install -y rrdtool sqlite3 && \
-#     apt-get clean && rm -rf /var/lib/apt/lists/*
-
-COPY --from=0 /usr/local/bin/munin-* /usr/local/bin/
-COPY --from=0 /usr/local/etc/munin/ /usr/local/etc/munin/
-
 RUN useradd munin
 
 # Initialize directories and sample config
@@ -51,7 +43,7 @@ ADD startup /etc/my_init.d/munin
 # http service
 EXPOSE 4948/tcp
 # munin-node service
-EXPOSE 4949/tcp
+# EXPOSE 4949/tcp
 
 VOLUME /var/lib/munin /var/log/munin /usr/local/etc/munin/munin-conf.d
 
