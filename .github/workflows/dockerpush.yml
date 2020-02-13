@@ -5,7 +5,8 @@ on:
     # Publish `master` as Docker `latest` image.
     branches:
       - master
-
+    paths-ignore:
+      - "**.md"
     # Publish `v1.2.3` tags as releases.
     tags:
       - v*
@@ -17,22 +18,23 @@ env:
   IMAGE_NAME: munin
 
 jobs:
-  # Run tests.
-  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  # test:
-  #   runs-on: ubuntu-latest
+  Run tests.
+  See also https://docs.docker.com/docker-hub/builds/automated-testing/
+  test:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
 
-  #   steps:
-  #     - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-  #     - name: Run tests
-  #       run: |
-  #         if [ -f docker-compose.test.yml ]; then
-  #           docker-compose --file docker-compose.test.yml build
-  #           docker-compose --file docker-compose.test.yml run sut
-  #         else
-  #           docker build . --file Dockerfile
-  #         fi
+      - name: Run tests
+        run: |
+          if [ -f docker-compose.test.yml ]; then
+            docker-compose --file docker-compose.test.yml build
+            docker-compose --file docker-compose.test.yml run sut
+          else
+            docker build . --file Dockerfile
+          fi
 
   # Push image to GitHub Package Registry.
   # See also https://docs.docker.com/docker-hub/builds/
