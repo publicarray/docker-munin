@@ -1,5 +1,5 @@
-[![](https://images.microbadger.com/badges/image/bauerj/munin-v3.svg)](https://microbadger.com/images/bauerj/munin-v3 "Get your own image badge on microbadger.com")
-[![](https://images.microbadger.com/badges/version/bauerj/munin-v3.svg)](https://microbadger.com/images/bauerj/munin-v3 "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/publicarray/munin.svg)](https://microbadger.com/images/publicarray/munin "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/publicarray/munin.svg)](https://microbadger.com/images/publicarray/munin "Get your own version badge on microbadger.com")
 
 # Munin v3 (master)
 
