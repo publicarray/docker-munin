@@ -42,7 +42,7 @@ Create a configuration file for munin, e.g (`/var/volumes/munin/conf/hosts.conf`
 If you use `docker-compose`:
 
       munin:
-        image: bauerj/munin-v3:0.3b4
+        image: publicarray/munin:2.999.14
         ports:
           - "80:4948"
         volumes:
@@ -51,7 +51,7 @@ If you use `docker-compose`:
 
 Or using docker run:
 
-    docker run --name munin -v '/var/volumes/munin/lib:/var/lib/munin' -v '/var/volumes/munin/conf:/usr/local/etc/munin/munin-conf.d' -p '80:4948' bauerj/munin-v3:0.3b3
+    docker run --name munin -v '/var/volumes/munin/lib:/var/lib/munin' -v '/var/volumes/munin/conf:/usr/local/etc/munin/munin-conf.d' -p '80:4948' publicarray/munin:2.999.14
 
 
 ### With a reverse proxy
