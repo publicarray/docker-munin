@@ -4,7 +4,7 @@ ENV MUNIN_VERSION 2.999.14
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y wget make perl unzip gcc && \
+    apt-get install -y wget make perl unzip gcc libhttp-server-simple-cgi-prefork-perl && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Perl dependencies
