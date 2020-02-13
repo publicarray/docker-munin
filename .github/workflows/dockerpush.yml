@@ -13,13 +13,15 @@ on:
 
   # Run tests for any PRs.
   pull_request:
+    paths-ignore:
+      - "**.md"
 
 env:
   IMAGE_NAME: munin
 
 jobs:
-  Run tests.
-  See also https://docs.docker.com/docker-hub/builds/automated-testing/
+  # Run tests.
+  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
   test:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
