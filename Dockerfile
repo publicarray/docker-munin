@@ -4,6 +4,7 @@ ENV MUNIN_VERSION 2.999.14
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
     wget \
     make \
     perl \
@@ -15,7 +16,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN yes | cpan Module::Build
 
 # Install munin
-RUN cd /tmp && wget https://github.com/munin-monitoring/munin/archive/${MUNIN_VERSION}.zip && \
+RUN update-ca-certificates && \
+    cd /tmp && wget https://github.com/munin-monitoring/munin/archive/${MUNIN_VERSION}.zip && \
     unzip ${MUNIN_VERSION}.zip && \
     cd /tmp/munin-${MUNIN_VERSION} && \
     perl Build.PL && \
