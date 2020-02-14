@@ -3,13 +3,13 @@ FROM ubuntu:19.10 as munin-build
 ENV MUNIN_VERSION 2.999.14
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     make \
     perl \
     unzip \
     gcc \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Perl dependencies
 RUN yes | cpan Module::Build
@@ -26,19 +26,23 @@ RUN cd /tmp && wget https://github.com/munin-monitoring/munin/archive/${MUNIN_VE
 
 FROM ubuntu:19.10 as munin
 
-RUN apt-get update && apt-get install -y \
-    libhttp-server-simple-cgi-prefork-perl \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    perl \
     rrdtool \
     librrds-perl \
     libio-string-perl \
     libxml-dumper-perl \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    libhttp-server-simple-cgi-prefork-perl \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN ls /usr/local/share/perl/
 
 COPY --from=0 /usr/local/bin/munin-* /usr/local/bin/
 COPY --from=0 /usr/local/etc/munin/ /usr/local/etc/munin/
 COPY --from=0 /usr/local/share/munin/ /usr/local/share/munin/
-COPY --from=0 /usr/local/share/perl/5.28.1/Munin /usr/local/share/perl/5.28.1/Munin
-COPY --from=0 /usr/local/share/perl/5.28.1/Munin.pm /usr/local/share/perl/5.28.1/Munin.pm
+COPY --from=0 /usr/local/share/perl/ /usr/local/share/perl/
+# COPY --from=0 /usr/local/share/perl/5.28.1/Munin /usr/local/share/perl/5.28.1/Munin
+# COPY --from=0 /usr/local/share/perl/5.28.1/Munin.pm /usr/local/share/perl/5.28.1/Munin.pm
 
 RUN useradd munin
 
@@ -65,6 +69,6 @@ EXPOSE 4948/tcp
 # munin-node service
 # EXPOSE 4949/tcp
 
-VOLUME /var/lib/munin /var/log/munin /usr/local/etc/munin/munin-conf.d
+VOLUME /var/lib/munin /var/log/munin
 
 CMD ["/usr/local/bin/munin-httpd"]
