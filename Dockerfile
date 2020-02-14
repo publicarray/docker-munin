@@ -33,11 +33,26 @@ FROM ubuntu:19.10 as munin
 RUN apt-get update && apt-get install -y --no-install-recommends \
     perl \
     rrdtool \
+    libdbi-perl \
+    liburi-perl \
     librrds-perl \
+    libjson-perl \
+    libnet-snmp-perl \
     libio-string-perl \
     libxml-dumper-perl \
+    libnet-server-perl \
+    libnet-ssleay-perl \
+    libdbd-sqlite3-perl \
+    libxml-dumper-perl \
     libsub-identify-perl \
+    liblog-dispatch-perl \
+    liblist-moreutils-perl \
+    libio-socket-inet6-perl \
+    libautobox-list-util-perl \
     libparams-validate-perl \
+    libparams-validate-perl \
+    libhtml-template-pro-perl \
+    libparallel-forkmanager-perl \
     libhttp-server-simple-cgi-prefork-perl \
     && rm -rf /var/lib/apt/lists/*
 
