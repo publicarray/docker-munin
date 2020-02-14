@@ -3,7 +3,7 @@ FROM ubuntu:19.10 as munin-build
 ENV MUNIN_VERSION 2.999.14
 
 # Install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y \
     ca-certificates \
     wget \
     make \
