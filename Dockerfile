@@ -36,6 +36,9 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=0 /usr/local/bin/munin-* /usr/local/bin/
 COPY --from=0 /usr/local/etc/munin/ /usr/local/etc/munin/
+COPY --from=0 /usr/local/share/munin/ /usr/local/share/munin/
+COPY --from=0 /usr/local/share/perl/5.28.1/Munin /usr/local/share/perl/5.28.1/Munin
+COPY --from=0 /usr/local/share/perl/5.28.1/Munin.pm /usr/local/share/perl/5.28.1/Munin.pm
 
 RUN useradd munin
 
