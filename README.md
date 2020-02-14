@@ -2,6 +2,8 @@
 [![](https://images.microbadger.com/badges/version/publicarray/munin.svg)](https://microbadger.com/images/publicarray/munin "Get your own version badge on microbadger.com")
 ![Docker](https://github.com/publicarray/docker-munin/workflows/Docker/badge.svg)
 
+**This image (204MB) is fork of bauerj/munin-v3 (645MB)**
+
 # Munin v3 (master)
 
 Munin v3 is currently in _beta_ stage, use at your own risk. The protcol is compatible to Munin v1 and Munin v2
