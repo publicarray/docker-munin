@@ -3,9 +3,13 @@ FROM ubuntu:19.10 as munin-build
 ENV MUNIN_VERSION 2.999.14
 
 # Install dependencies
-RUN apt-get update && \
-    apt-get install -y wget make perl unzip gcc libhttp-server-simple-cgi-prefork-perl && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    wget \
+    make \
+    perl \
+    unzip \
+    gcc \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Perl dependencies
 RUN yes | cpan Module::Build
@@ -19,6 +23,19 @@ RUN cd /tmp && wget https://github.com/munin-monitoring/munin/archive/${MUNIN_VE
     make && \
     make install && \
     cd && rm /tmp/munin-2.999.14 -r
+
+FROM ubuntu:19.10 as munin
+
+RUN apt-get update && apt-get install -y \
+    libhttp-server-simple-cgi-prefork-perl \
+    rrdtool \
+    librrds-perl \
+    libio-string-perl \
+    libxml-dumper-perl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+COPY --from=0 /usr/local/bin/munin-* /usr/local/bin/
+COPY --from=0 /usr/local/etc/munin/ /usr/local/etc/munin/
 
 RUN useradd munin
 
