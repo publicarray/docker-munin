@@ -26,6 +26,8 @@ RUN update-ca-certificates && \
     make install && \
     cd && rm /tmp/munin-2.999.14 -r
 
+RUN ls /usr/local/share/perl/
+
 FROM ubuntu:19.10 as munin
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -36,8 +38,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxml-dumper-perl \
     libhttp-server-simple-cgi-prefork-perl \
     && rm -rf /var/lib/apt/lists/*
-
-RUN ls /usr/local/share/perl/
 
 COPY --from=0 /usr/local/bin/munin-* /usr/local/bin/
 COPY --from=0 /usr/local/etc/munin/ /usr/local/etc/munin/
