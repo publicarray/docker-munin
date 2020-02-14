@@ -1,5 +1,6 @@
 [![](https://images.microbadger.com/badges/image/publicarray/munin.svg)](https://microbadger.com/images/publicarray/munin "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/publicarray/munin.svg)](https://microbadger.com/images/publicarray/munin "Get your own version badge on microbadger.com")
+![Docker](https://github.com/publicarray/docker-munin/workflows/Docker/badge.svg)
 
 # Munin v3 (master)
 
