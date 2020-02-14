@@ -36,6 +36,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     librrds-perl \
     libio-string-perl \
     libxml-dumper-perl \
+    libsub-identify-perl \
+    libparams-validate-per \
     libhttp-server-simple-cgi-prefork-perl \
     && rm -rf /var/lib/apt/lists/*
 
