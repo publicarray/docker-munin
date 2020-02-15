@@ -74,6 +74,7 @@ RUN ls /usr/local/share/perl/
 FROM ubuntu:19.10 as munin
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    cron \
     perl \
     rrdtool \
     libdbi-perl \
@@ -121,6 +122,8 @@ ADD run.sh /etc/service/munin/run
 
 # munin-cron
 ADD cron-entry /etc/cron.d/munin
+
+RUN crontab /etc/cron.d/munin
 
 # munin-cron will run on container start. Otherwise we would get an error message while trying to access the Web UI
 ADD startup /etc/my_init.d/munin
