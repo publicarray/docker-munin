@@ -117,16 +117,12 @@ RUN mkdir -p /var/run/munin && \
 # Munin config
 ADD munin.conf /usr/local/etc/munin/munin.conf
 
-# HTTP server
-ADD run.sh /etc/service/munin/run
-
 # munin-cron
 ADD cron-entry /etc/cron.d/munin
 
 RUN crontab /etc/cron.d/munin
 
-# munin-cron will run on container start. Otherwise we would get an error message while trying to access the Web UI
-ADD startup /etc/my_init.d/munin
+ADD entrypoint.sh /entrypoint.sh
 
 # http service
 EXPOSE 4948/tcp
@@ -135,4 +131,4 @@ EXPOSE 4948/tcp
 
 VOLUME /var/lib/munin /var/log/munin
 
-CMD ["/usr/local/bin/munin-httpd"]
+ENTRYPOINT /entrypoint.sh
