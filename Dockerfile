@@ -1,4 +1,4 @@
-FROM ubuntu:19.10 as munin-build
+FROM ubuntu:20.04 as munin-build
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
